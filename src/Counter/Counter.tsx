@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import CounterWindow from "./CounterWindow/CounterWindow";
 import CounterSettings from "./CounterSettings/CounterSettings";
 import CounterButtons from "./CounterButtons/CounterButtons";
@@ -11,7 +11,6 @@ type CounterType = {
     reset: () => void
     setMinValue: (value: number) => void
     setMaxValue: (value: number) => void
-    // setError: () => void
     setEditMode: (isEditMode: boolean) => void
 }
 
