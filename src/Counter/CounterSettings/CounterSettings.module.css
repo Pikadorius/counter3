@@ -1,0 +1,32 @@
+.input {
+    display: inline-block;
+    width: 60px;
+    border-radius: 2px;
+    border: 2px solid #61dafb;
+    outline: none;
+    text-align: center;
+}
+
+.inputError {
+    background-color: rgba(255, 0,0, 0.7);
+    border: 2px solid red;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background-color: #282c34;
+    border-radius: 10px;
+    border: 3px solid #61dafb;
+    color: #61dafb;
+}
+
+.inputAndText {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+    margin: 5px;
+}

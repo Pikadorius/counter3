@@ -1,0 +1,21 @@
+.wrapper {
+    background-color: #282c34;
+    border: 2px solid #61dafb;
+    border-radius: 10px;
+    width: 250px;
+    margin: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    color: white;
+}
+
+.windowArea {
+
+}
+
+.buttonsArea {
+
+}

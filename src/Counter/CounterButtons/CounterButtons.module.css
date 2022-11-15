@@ -1,0 +1,15 @@
+.wrapper {
+    margin-top: 10px;
+    border: 3px solid #61dafb;
+    border-radius: 10px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonArea {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+}
