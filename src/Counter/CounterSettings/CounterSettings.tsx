@@ -11,7 +11,7 @@ type CounterSettingsType = {
 const CounterSettings: React.FC<CounterSettingsType> = (props) => {
 
     const minValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setMinValue(+e.currentTarget.value)
+        props.setMinValue(e.currentTarget.valueAsNumber)
     }
     const maxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.setMaxValue(+e.currentTarget.value)
@@ -20,8 +20,8 @@ const CounterSettings: React.FC<CounterSettingsType> = (props) => {
     // const inputMaxClass = props.state.maxValue > props.state.minValue ? s.input : `${s.input} ${s.inputError}`
 
     let inputMaxClass;
-    if(props.state.maxValue>props.state.minValue && props.state.minValue>=0) inputMaxClass=`${s.input}`
-    else inputMaxClass=`${s.input} ${s.inputError}`
+    if (props.state.maxValue > props.state.minValue && props.state.minValue >= 0) inputMaxClass = `${s.input}`
+    else inputMaxClass = `${s.input} ${s.inputError}`
 
     const classFunc = () => {
         if (props.state.minValue >= 0 && props.state.minValue < props.state.maxValue) {
@@ -32,10 +32,15 @@ const CounterSettings: React.FC<CounterSettingsType> = (props) => {
 
     return (
         <div className={s.wrapper}>
-            <div className={s.inputAndText}>Max. value: <input className={inputMaxClass} value={props.state.maxValue} type={'number'}
-                                    onChange={maxValueHandler}/></div>
-            <div className={s.inputAndText}>Min. value: <input className={inputMinClass} value={props.state.minValue} type={'number'}
-                                    onChange={minValueHandler}/></div>
+            <div className={s.inputAndText}>Max. value:
+                <input className={inputMaxClass}
+                       value={props.state.maxValue}
+                       type={'number'}
+                       onChange={maxValueHandler}/>
+            </div>
+            <div className={s.inputAndText}>Min. value: <input className={inputMinClass} value={props.state.minValue}
+                                                               type={'number'}
+                                                               onChange={minValueHandler}/></div>
         </div>
     );
 };

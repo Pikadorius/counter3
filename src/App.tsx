@@ -13,20 +13,23 @@ export type StateType = {
 
 function App() {
 
-    const [state, setState] = useState<StateType>(() => {
-        let localState = localStorage.getItem('state')
-        if (localState) {
-            let localSt = localState && JSON.parse(localState)
-            return {...localSt, currentValue: localSt.minValue, isEditMode: false}
-        } else return {minValue: 0, currentValue: 0, maxValue: 5, error: '', isEditMode: false}
-    })
+
+    const [state, setState] = useState<StateType>(    {minValue: 0, currentValue: 0, maxValue: 5, error: '', isEditMode: false}
+    )
+
+    useEffect(()=>{
+       let localState=localStorage.getItem('state')
+        localState && setState(JSON.parse(localState))
+    }, [])
 
     useEffect(() => {
         localStorage.setItem('state', JSON.stringify(state))
     }, [state])
 
+
     const increase = () => {
-        state.currentValue < state.maxValue && setState({...state, currentValue: state.currentValue + 1, error: ''})
+        const checkStartValue =  state.currentValue < state.maxValue
+        checkStartValue && setState({...state, currentValue: state.currentValue + 1, error: ''})
     }
 
     const reset = () => {
@@ -40,7 +43,9 @@ function App() {
     const setMinValue = (minValue: number) => {
         if (minValue >= 0 && minValue < state.maxValue) {
             setState({...state, minValue: minValue, currentValue: minValue, error: ''})
-        } else setState({...state, minValue, currentValue: state.minValue, error: "Incorrect value!"})
+        } else {
+            setState({...state, minValue, currentValue: state.minValue, error: "Incorrect value!"})
+        }
     }
 
     const setMaxValue = (maxValue: number) => {

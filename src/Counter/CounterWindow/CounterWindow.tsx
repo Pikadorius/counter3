@@ -9,8 +9,8 @@ type CounterWindowType = {
 
 const CounterWindow = (props: CounterWindowType) => {
 
-    let valueClass=s.value
-    if(props.value==='Incorrect value!' || props.value===props.maxValue) valueClass+=` ${s.valueError}`
+    let valueClass = s.value
+    if (props.value === 'Incorrect value!' || props.value === props.maxValue) valueClass += ` ${s.valueError}`
     return (
         <div className={s.wrapper}>
             <div className={valueClass}>{props.value}</div>
