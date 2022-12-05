@@ -12,8 +12,6 @@ export type StateType = {
 }
 
 function App() {
-
-
     const [state, setState] = useState<StateType>(    {minValue: 0, currentValue: 0, maxValue: 5, error: '', isEditMode: false}
     )
 
