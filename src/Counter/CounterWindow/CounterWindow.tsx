@@ -1,6 +1,6 @@
 import React from 'react';
-import {ErrorType} from "../../App";
 import s from './CounterWindow.module.css'
+import {ErrorType} from '../../reducer/counterReducer';
 
 type CounterWindowType = {
     value: number | ErrorType

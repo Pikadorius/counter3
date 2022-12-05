@@ -1,15 +1,15 @@
 import React from 'react';
 import Button from "../../Button/Button";
-import {StateType} from "../../App";
 import s from './CounterButtons.module.css'
+import {InitialStateType} from '../../reducer/counterReducer';
 
 type CounterButtons = {
-    state: StateType
+    state: InitialStateType
     isEditMode: boolean
-    setEditMode: (isEditMode:boolean)=>void
-    increase: ()=>void
-    reset: ()=>void
-    setValue: ()=>void
+    setEditMode: (isEditMode: boolean) => void
+    increase: () => void
+    reset: () => void
+    setValue: () => void
 }
 
 const CounterButtons = (props: CounterButtons) => {
@@ -30,15 +30,15 @@ const CounterButtons = (props: CounterButtons) => {
                     <Button
                         name={"Inc"}
                         onClick={props.increase}
-                        disabled={props.state.currentValue===props.state.maxValue || props.state.error==="Incorrect value!"}/>
+                        disabled={props.state.currentValue === props.state.maxValue || props.state.error === "Incorrect value!"}/>
                     <Button
                         name={"Reset"}
                         onClick={props.reset}
-                        disabled={props.state.currentValue===props.state.minValue || props.state.error==="Incorrect value!"}/>
+                        disabled={props.state.currentValue === props.state.minValue || props.state.error === "Incorrect value!"}/>
                     <Button
                         name={"Set"}
-                        onClick={()=>props.setEditMode(props.isEditMode)}/>
-                </div> }
+                        onClick={() => props.setEditMode(props.isEditMode)}/>
+                </div>}
         </div>
     );
 };

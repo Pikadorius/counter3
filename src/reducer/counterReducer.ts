@@ -1,4 +1,4 @@
-import {ErrorType} from '../App';
+export type ErrorType = '' | 'Incorrect value!'
 
 const initialState={
     minValue: 0,
@@ -8,7 +8,8 @@ const initialState={
     isEditMode: false
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
+
 type ActionType = IncreaseACType | ResetACType | EditModeACType | SetMinValueACType | SetMaxValueACType
 
 export const counterReducer = (state: InitialStateType = initialState, action: ActionType):InitialStateType => {
@@ -24,10 +25,10 @@ export const counterReducer = (state: InitialStateType = initialState, action: A
             return {...state, isEditMode: !action.payload}
         }
         case 'SET_MIN_VALUE':{
-            if (action.payload >= 0 && state.minValue < state.maxValue) {
-                return {...state, minValue:action.payload, currentValue: state.minValue, error: ''}
+            if (action.payload >= 0 && action.payload < state.maxValue) {
+                return {...state, minValue:action.payload, currentValue: action.payload, error: ''}
             } else {
-                return {...state, minValue:action.payload, currentValue: state.minValue, error: "Incorrect value!"}
+                return {...state, minValue:action.payload, currentValue: action.payload, error: "Incorrect value!"}
             }
         }
         case 'SET_MAX_VALUE':{
@@ -40,6 +41,7 @@ export const counterReducer = (state: InitialStateType = initialState, action: A
 }
 
 type IncreaseACType = ReturnType<typeof increaseAC>
+
 export const increaseAC = () => {
     return {
         type: 'INCREASE'
@@ -47,6 +49,7 @@ export const increaseAC = () => {
 }
 
 type ResetACType = ReturnType<typeof resetAC>
+
 export const resetAC = () => {
     return {
         type: 'RESET'
@@ -54,6 +57,7 @@ export const resetAC = () => {
 }
 
 type EditModeACType = ReturnType<typeof ediTypetModeAC>
+
 export const ediTypetModeAC = (isEditMode:boolean) => {
     return {
         type: 'EDIT_MODE',
@@ -62,6 +66,7 @@ export const ediTypetModeAC = (isEditMode:boolean) => {
 }
 
 type SetMinValueACType = ReturnType<typeof setMinValueAC>
+
 export const setMinValueAC = (minValue:number) => {
     return {
         type: 'SET_MIN_VALUE',

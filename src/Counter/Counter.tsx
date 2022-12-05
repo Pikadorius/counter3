@@ -2,42 +2,67 @@ import React from 'react';
 import CounterWindow from "./CounterWindow/CounterWindow";
 import CounterSettings from "./CounterSettings/CounterSettings";
 import CounterButtons from "./CounterButtons/CounterButtons";
-import {StateType} from "../App";
 import s from './Counter.module.css'
+import {
+    ediTypetModeAC,
+    increaseAC,
+    InitialStateType,
+    resetAC,
+    setMaxValueAC,
+    setMinValueAC
+} from '../reducer/counterReducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootType} from '../reducer/store';
 
-type CounterType = {
-    state: StateType
-    increase: () => void
-    reset: () => void
-    setMinValue: (value: number) => void
-    setMaxValue: (value: number) => void
-    setEditMode: (isEditMode: boolean) => void
-}
 
-const Counter: React.FC<CounterType> = (props) => {
+const Counter: React.FC= () => {
+
+    const state=useSelector<AppRootType,InitialStateType>(state=>state.counter)
+    const dispatch=useDispatch()
+
+    const increase = () => {
+        dispatch(increaseAC())
+    }
+
+    const reset = () => {
+        dispatch(resetAC())
+    }
+
+    const setEditMode = (isEditMode: boolean) => {
+        dispatch(ediTypetModeAC(isEditMode))
+    }
+
+    const setMinValue = (minValue: number) => {
+        dispatch(setMinValueAC(minValue))
+    }
+
+    const setMaxValue = (maxValue: number) => {
+        dispatch(setMaxValueAC(maxValue))
+    }
+
 
 
     return (
         <div className={s.wrapper}>
             <div className={s.windowArea}>
                 {
-                    props.state.isEditMode
+                    state.isEditMode
                         ? <CounterSettings
-                            state={props.state}
-                            setMinValue={props.setMinValue}
-                            setMaxValue={props.setMaxValue}/>
+                            state={state}
+                            setMinValue={setMinValue}
+                            setMaxValue={setMaxValue}/>
                         : <CounterWindow
-                            value={props.state.error === 'Incorrect value!' ? props.state.error : props.state.currentValue}
-                            maxValue={props.state.maxValue}/>
+                            value={state.error === 'Incorrect value!' ? state.error : state.currentValue}
+                            maxValue={state.maxValue}/>
                 }
             </div>
             <div className={s.buttonsArea}>
                 <CounterButtons
-                    state={props.state}
-                    isEditMode={props.state.isEditMode}
-                    setEditMode={props.setEditMode}
-                    increase={props.increase}
-                    reset={props.reset}
+                    state={state}
+                    isEditMode={state.isEditMode}
+                    setEditMode={setEditMode}
+                    increase={increase}
+                    reset={reset}
                     setValue={() => {
                     }}/>
             </div>

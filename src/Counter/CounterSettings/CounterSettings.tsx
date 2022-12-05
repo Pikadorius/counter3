@@ -1,9 +1,10 @@
 import React, {ChangeEvent, useState} from 'react';
-import {StateType} from "../../App";
+
 import s from './CounterSettings.module.css'
+import {InitialStateType} from '../../reducer/counterReducer';
 
 type CounterSettingsType = {
-    state: StateType
+    state: InitialStateType
     setMinValue: (value: number) => void
     setMaxValue: (value: number) => void
 }
