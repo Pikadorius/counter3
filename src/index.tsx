@@ -4,7 +4,25 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
-import {store} from './reducer/store';
+import {reducer} from './reducer/store';
+import {loadState, saveState} from './loaclStorage/localStorage';
+import {createStore} from 'redux';
+import throttle from 'lodash/throttle';   // import only throttle !!!
+
+const persistedState = loadState()
+// combine states, so reducer state will be rewriten if state from localStorage comes
+const store = createStore(reducer, persistedState)
+
+
+// if state changes - we save state to localStorage
+// JSON.stringify is expensive method, so we use throttle (lodash) method to call saveState no more than once in 1000ms
+store.subscribe(throttle(() => {
+    // save with some changes (we don't need editMode and currentValue)
+    saveState({
+        ...store.getState(),
+        counter: {...store.getState().counter, isEditMode: false, currentValue: store.getState().counter.minValue}
+    })
+}, 1000))
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
