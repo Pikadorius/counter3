@@ -56,9 +56,9 @@ export const resetAC = () => {
     } as const
 }
 
-type EditModeACType = ReturnType<typeof ediTypetModeAC>
+type EditModeACType = ReturnType<typeof editModeAC>
 
-export const ediTypetModeAC = (isEditMode:boolean) => {
+export const editModeAC = (isEditMode:boolean) => {
     return {
         type: 'EDIT_MODE',
         payload: isEditMode

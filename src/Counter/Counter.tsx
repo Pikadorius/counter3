@@ -4,7 +4,7 @@ import CounterSettings from "./CounterSettings/CounterSettings";
 import CounterButtons from "./CounterButtons/CounterButtons";
 import s from './Counter.module.css'
 import {
-    ediTypetModeAC,
+    editModeAC,
     increaseAC,
     InitialStateType,
     resetAC,
@@ -13,12 +13,10 @@ import {
 } from '../reducer/counterReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootType} from '../reducer/store';
+const Counter: React.FC = () => {
 
-
-const Counter: React.FC= () => {
-
-    const state=useSelector<AppRootType,InitialStateType>(state=>state.counter)
-    const dispatch=useDispatch()
+    const state = useSelector<AppRootType, InitialStateType>(state => state.counter)
+    const dispatch = useDispatch()
 
     const increase = () => {
         dispatch(increaseAC())
@@ -29,7 +27,7 @@ const Counter: React.FC= () => {
     }
 
     const setEditMode = (isEditMode: boolean) => {
-        dispatch(ediTypetModeAC(isEditMode))
+        dispatch(editModeAC(isEditMode))
     }
 
     const setMinValue = (minValue: number) => {
@@ -39,7 +37,6 @@ const Counter: React.FC= () => {
     const setMaxValue = (maxValue: number) => {
         dispatch(setMaxValueAC(maxValue))
     }
-
 
 
     return (
@@ -59,12 +56,9 @@ const Counter: React.FC= () => {
             <div className={s.buttonsArea}>
                 <CounterButtons
                     state={state}
-                    isEditMode={state.isEditMode}
                     setEditMode={setEditMode}
                     increase={increase}
-                    reset={reset}
-                    setValue={() => {
-                    }}/>
+                    reset={reset}/>
             </div>
         </div>
     );

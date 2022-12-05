@@ -5,23 +5,21 @@ import {InitialStateType} from '../../reducer/counterReducer';
 
 type CounterButtons = {
     state: InitialStateType
-    isEditMode: boolean
     setEditMode: (isEditMode: boolean) => void
     increase: () => void
     reset: () => void
-    setValue: () => void
 }
 
 const CounterButtons = (props: CounterButtons) => {
 
     const setEditMode = () => {
-        props.setEditMode(props.isEditMode)
+        props.setEditMode(props.state.isEditMode)
     }
 
 
     return (
         <div className={s.wrapper}>
-            {props.isEditMode ?
+            {props.state.isEditMode ?
                 <div>
                     <Button name={"Set"} onClick={setEditMode}/>
                 </div>
@@ -37,7 +35,7 @@ const CounterButtons = (props: CounterButtons) => {
                         disabled={props.state.currentValue === props.state.minValue || props.state.error === "Incorrect value!"}/>
                     <Button
                         name={"Set"}
-                        onClick={() => props.setEditMode(props.isEditMode)}/>
+                        onClick={setEditMode}/>
                 </div>}
         </div>
     );
