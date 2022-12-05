@@ -17,6 +17,24 @@ export const counterReducer = (state: InitialStateType = initialState, action: A
             const checkStartValue =  state.currentValue < state.maxValue
             return checkStartValue? {...state, currentValue: state.currentValue + 1, error: ''} : {...state, error: 'Incorrect value!'}
         }
+        case 'RESET': {
+            return {...state, currentValue: state.minValue, error: ''}
+        }
+        case 'EDIT_MODE': {
+            return {...state, isEditMode: !action.payload}
+        }
+        case 'SET_MIN_VALUE':{
+            if (action.payload >= 0 && state.minValue < state.maxValue) {
+                return {...state, minValue:action.payload, currentValue: state.minValue, error: ''}
+            } else {
+                return {...state, minValue:action.payload, currentValue: state.minValue, error: "Incorrect value!"}
+            }
+        }
+        case 'SET_MAX_VALUE':{
+            if (action.payload > state.minValue && state.minValue >= 0) {
+                return {...state, maxValue:action.payload, currentValue: state.minValue, error: ''}
+            } else return {...state, maxValue:action.payload, currentValue: state.minValue, error: "Incorrect value!"}
+        }
         default: return state
     }
 }

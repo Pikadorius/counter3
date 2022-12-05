@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import Counter from "./Counter/Counter";
+import {useDispatch, useSelector} from 'react-redux';
 
 export type ErrorType = '' | 'Incorrect value!'
 export type StateType = {
@@ -14,6 +15,9 @@ export type StateType = {
 function App() {
     const [state, setState] = useState<StateType>(    {minValue: 0, currentValue: 0, maxValue: 5, error: '', isEditMode: false}
     )
+
+    const stateCounter=useSelector<StateType>(state=>state)
+    const dispatch=useDispatch()
 
     useEffect(()=>{
        let localState=localStorage.getItem('state')
